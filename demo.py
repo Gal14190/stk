@@ -16,11 +16,16 @@ center_weight = 0.05  # משקל העדפה למרכז
 velocity = 0.0
 prev_time = None
 
+ctx = rs.context()
+devices = ctx.query_devices()
+print(devices[0])
+
 # === אתחול RealSense עם עומק ו-IMU ===
 pipeline = rs.pipeline()
 config = rs.config()
 config.enable_stream(rs.stream.depth, FRAME_WIDTH, FRAME_HEIGHT, rs.format.z16, 30)
 config.enable_stream(rs.stream.accel)  # חיישן תאוצה
+
 
 profile = pipeline.start(config)
 sensor = profile.get_device().first_motion_sensor()
